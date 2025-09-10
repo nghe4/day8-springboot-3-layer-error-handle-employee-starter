@@ -38,4 +38,11 @@ public class CompanyRepository {
         companies.add(company);
         return company;
     }
+
+    public Company getCompanyById(int id) {
+        return companies.stream()
+                .filter(company -> company.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found with id: " + id));
+    }
 }

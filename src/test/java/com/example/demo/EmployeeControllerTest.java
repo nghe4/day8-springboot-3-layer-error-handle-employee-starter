@@ -31,12 +31,12 @@ public class EmployeeControllerTest {
     }
 
 
-    private Employee createJaneDoe() throws Exception {
+    private void createJaneDoe() throws Exception {
         Gson gson = new Gson();
         String jane = gson.toJson(new Employee(null, "Jane Doe", 22, "FEMALE", 60000.0));
         ResultActions result = mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(jane));
         String jsonString = result.andReturn().getResponse().getContentAsString();
-        return gson.fromJson(jsonString, Employee.class);
+        gson.fromJson(jsonString, Employee.class);
     }
 
     @BeforeEach

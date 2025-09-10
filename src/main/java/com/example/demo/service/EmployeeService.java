@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.Exception.InvalidAgeEmployeeException;
+import com.example.demo.Exception.InvalidSalaryEmployeeException;
 import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import org.springframework.http.HttpStatus;
@@ -29,12 +30,13 @@ public class EmployeeService {
         return employee;
     }
 
-    public Employee createEmployee(Employee employee) throws InvalidAgeEmployeeException {
+    public Employee createEmployee(Employee employee) throws InvalidAgeEmployeeException, InvalidSalaryEmployeeException {
         if (employee.getAge() == null)
             throw new InvalidAgeEmployeeException("Employee age is null");
         if (employee.getAge() < 18 || employee.getAge() > 65)
             throw new InvalidAgeEmployeeException("Employee age less than 18 or greater than 65");
-
+        if (employee.getAge() > 29 && (employee.getSalary() == null || employee.getSalary() < 20000))
+            throw new InvalidSalaryEmployeeException("Employee age over 29 and salary below 20000");
         return employeeRepository.createEmployee(employee);
     }
 

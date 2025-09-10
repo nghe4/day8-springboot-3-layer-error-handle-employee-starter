@@ -20,9 +20,6 @@ public class EmployeeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private EmployeeController employeeController;
-
     //    private static Employee employee(String name, int age, String gender, double salary) {
 //        Employee e = new Employee();
 //        e.setName(name);

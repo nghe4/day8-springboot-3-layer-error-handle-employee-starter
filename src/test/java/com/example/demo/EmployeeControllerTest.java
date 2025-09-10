@@ -232,5 +232,22 @@ public class EmployeeControllerTest {
                         .content(requestBody))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void should_return_400_when_create_a_employee_of_age_over_29_and_salary_below_20000() throws Exception {
+        String requestBody = """
+                    {
+                        "name": "John Smith",
+                        "age": 30,
+                        "gender": "MALE",
+                        "salary": 10000
+                    }
+            """;
+
+        mockMvc.perform(post("/employees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isBadRequest());
+    }
 }
 

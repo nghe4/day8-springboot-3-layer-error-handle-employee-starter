@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.Exception.InvalidAgeEmployeeException;
-import com.example.demo.Exception.InvalidSalaryEmployeeException;
-import com.example.demo.Exception.InvalidUpdateEmployeeException;
+import com.example.demo.exception.InvalidAgeEmployeeException;
+import com.example.demo.exception.InvalidSalaryEmployeeException;
+import com.example.demo.exception.InvalidUpdateEmployeeException;
 import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import org.springframework.http.HttpStatus;

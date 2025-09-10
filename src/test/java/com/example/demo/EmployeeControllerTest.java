@@ -204,8 +204,8 @@ public class EmployeeControllerTest {
     void should_active_status_false_when_delete_employee() throws Exception {
         Employee employee = createJohnSmith();
 
-        mockMvc.perform(delete("/employees/"+employee.getId()));
-        mockMvc.perform(get("/employees/"+employee.getId()))
+        mockMvc.perform(delete("/employees/" + employee.getId()));
+        mockMvc.perform(get("/employees/" + employee.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.active").value(false));
     }
@@ -215,4 +215,22 @@ public class EmployeeControllerTest {
         mockMvc.perform(delete("/employees/999"))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void should_return_400_when_create_a_employee_of_age_greater_than_65_or_less_than_18() throws Exception {
+        String requestBody = """
+                        {
+                            "name": "John Smith",
+                            "age": 15,
+                            "gender": "MALE",
+                            "salary": 10000
+                        }
+                """;
+
+        mockMvc.perform(post("/employees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isBadRequest());
+    }
 }
+

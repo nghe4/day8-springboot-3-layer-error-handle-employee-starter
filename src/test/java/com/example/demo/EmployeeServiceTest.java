@@ -15,4 +15,18 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class EmployeeServiceTest {
+    @InjectMocks
+    private EmployeeService employeeService;
+
+    @Mock
+    private EmployeeRepository employeeRepository;
+
+    @Test
+    void should_throw_expcetion_when_create_a_employee() {
+        Employee employee = new Employee(null, "Tom", 29, "MALE", 20000.0);
+        when(employeeRepository.createEmployee(any(Employee.class))).thenReturn(employee);
+        Employee employeeResult = employeeService.createEmployee(employee);
+
+        assertEquals(employeeResult.getAge(), employee.getAge());
+    }
 }

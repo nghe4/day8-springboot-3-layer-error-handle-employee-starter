@@ -45,8 +45,8 @@ public class EmployeeControllerTest {
     }
 
     @BeforeEach
-    void cleanEmployees() {
-        employeeController.empty();
+    void cleanEmployees() throws Exception {
+        mockMvc.perform(delete("/employees/all"));
     }
 
     @Test
@@ -66,7 +66,6 @@ public class EmployeeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2));
     }
-
 //    @Test
 //    void should_return_employee_when_employee_found() throws Exception {
 //        Employee expect = employeeController.createEmployee(johnSmith());

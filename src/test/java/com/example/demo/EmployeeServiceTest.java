@@ -45,4 +45,11 @@ public class EmployeeServiceTest {
         when(employeeRepository.createEmployee(any(Employee.class))).thenReturn(employee);
         assertThrows(InvalidSalaryEmployeeException.class, () -> employeeService.createEmployee(employee));
     }
+
+    @Test
+    void should_set_active_status_true_when_create_a_employee() {
+        Employee employee = new Employee(null, "Tom", 18, "MALE", 10000.0);
+        when(employeeRepository.createEmployee(any(Employee.class))).thenReturn(employee);
+        assertTrue(employee.isActive());
+    }
 }

@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.exception.InvalidAgeEmployeeException;
-import com.example.demo.exception.InvalidSalaryEmployeeException;
-import com.example.demo.exception.InvalidUpdateEmployeeException;
 import com.example.demo.entity.Employee;
+import com.example.demo.exceptions.InvalidAgeEmployeeException;
+import com.example.demo.exceptions.InvalidSalaryEmployeeException;
+import com.example.demo.exceptions.InvalidUpdateEmployeeException;
 import com.example.demo.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

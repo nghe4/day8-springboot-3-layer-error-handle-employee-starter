@@ -209,4 +209,10 @@ public class EmployeeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.active").value(false));
     }
+
+    @Test
+    void should_return_404_when_delete_non_exist_employee() throws Exception {
+        mockMvc.perform(delete("/employees/999"))
+                .andExpect(status().isNotFound());
+    }
 }

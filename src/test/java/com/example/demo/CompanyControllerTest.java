@@ -106,23 +106,21 @@ public class CompanyControllerTest {
                 .andExpect(status().isNoContent());
     }
 
-//    @Test
-//    void should_return_truncated_companies_when_page_size_is_limit() throws Exception {
-//        Company spring = new Company();
-//        spring.setName("Spring");
-//        companyController.createCompany(spring);
-//        companyController.createCompany(spring);
-//        companyController.createCompany(spring);
-//        companyController.createCompany(spring);
-//        companyController.createCompany(spring);
-//        companyController.createCompany(spring);
-//        MockHttpServletRequestBuilder request = get("/companies?page=1&size=5")
-//                .contentType(MediaType.APPLICATION_JSON);
-//
-//        mockMvc.perform(request)
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.length()").value(5));
-//    }
+    @Test
+    void should_return_truncated_companies_when_page_size_is_limit() throws Exception {
+        createCompany();
+        createCompany();
+        createCompany();
+        createCompany();
+        createCompany();
+        createCompany();
+        MockHttpServletRequestBuilder request = get("/companies?page=1&size=5")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(5));
+    }
 //
 //    @Test
 //    void should_status_404_when_get_company_by_id_not_found() throws Exception {

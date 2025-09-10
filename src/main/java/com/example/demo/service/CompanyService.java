@@ -1,12 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Company;
-import com.example.demo.entity.Employee;
 import com.example.demo.repository.CompanyRepository;
-import com.example.demo.repository.EmployeeRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 

@@ -19,4 +19,8 @@ public class CompanyRepository {
         companies.add(new Company(3, "Winter"));
         companies.add(new Company(4, "Summer"));
     }
+
+    public void clearCompanies() {
+        companies.clear();
+    }
 }

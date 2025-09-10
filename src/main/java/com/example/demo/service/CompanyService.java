@@ -17,4 +17,8 @@ public class CompanyService {
     public CompanyService(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
+
+    public void clearCompanies() {
+        companyRepository.clearCompanies();
+    }
 }

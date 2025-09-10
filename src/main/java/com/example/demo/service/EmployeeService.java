@@ -54,7 +54,8 @@ public class EmployeeService {
         if (employee == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found with id: " + id);
         }
-        employeeRepository.deleteEmployee(id);
+        employee.setActive(false);
+        employeeRepository.updateEmployee(id, employee);
     }
 
     public void clearEmployees() {

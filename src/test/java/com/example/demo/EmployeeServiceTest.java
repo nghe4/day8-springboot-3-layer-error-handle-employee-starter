@@ -12,7 +12,8 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -51,5 +52,16 @@ public class EmployeeServiceTest {
         Employee employee = new Employee(null, "Tom", 18, "MALE", 10000.0);
         when(employeeRepository.createEmployee(any(Employee.class))).thenReturn(employee);
         assertTrue(employee.isActive());
+    }
+
+    @Test
+    void should_set_active_status_false_when_delete_a_employee() {
+        Employee employee = new Employee(1, "Tom", 20, "MALE", 10000.0);
+        assertTrue(employee.isActive());
+        when(employeeRepository.getEmployeeById(1)).thenReturn(employee);
+
+        employeeService.deleteEmployee(1);
+
+        verify(employeeRepository).updateEmployee(eq(1), argThat(e -> e.isActive() == false));
     }
 }

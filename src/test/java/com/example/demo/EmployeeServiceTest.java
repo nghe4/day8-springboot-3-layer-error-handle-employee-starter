@@ -24,7 +24,7 @@ public class EmployeeServiceTest {
     private EmployeeRepository employeeRepository;
 
     @Test
-    void should_throw_expcetion_when_create_a_employee() throws InvalidAgeEmployeeException, InvalidSalaryEmployeeException {
+    void should_throw_exception_when_create_a_employee() throws InvalidAgeEmployeeException, InvalidSalaryEmployeeException {
         Employee employee = new Employee(null, "Tom", 29, "MALE", 20000.0);
         when(employeeRepository.createEmployee(any(Employee.class))).thenReturn(employee);
         Employee employeeResult = employeeService.createEmployee(employee);
@@ -33,7 +33,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void should_throw_expcetion_when_create_a_employee_of_age_greater_than_65_or_less_than_18() {
+    void should_throw_exception_when_create_a_employee_of_age_greater_than_65_or_less_than_18() {
         Employee employee = new Employee(null, "Tom", 16, "MALE", 20000.0);
         when(employeeRepository.createEmployee(any(Employee.class))).thenReturn(employee);
         assertThrows(InvalidAgeEmployeeException.class, () -> employeeService.createEmployee(employee));

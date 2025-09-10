@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.Company;
+import com.example.demo.entity.Employee;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,5 +31,11 @@ public class CompanyRepository {
             stream = stream.skip((long) (page - 1) * size).limit(size);
         }
         return stream.toList();
+    }
+
+    public Company createCompany(Company company) {
+        company.setId(companies.size() + 1);
+        companies.add(company);
+        return company;
     }
 }

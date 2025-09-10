@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Exception.InvalidAgeEmployeeException;
 import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
@@ -22,11 +23,18 @@ public class EmployeeServiceTest {
     private EmployeeRepository employeeRepository;
 
     @Test
-    void should_throw_expcetion_when_create_a_employee() {
+    void should_throw_expcetion_when_create_a_employee() throws InvalidAgeEmployeeException {
         Employee employee = new Employee(null, "Tom", 29, "MALE", 20000.0);
         when(employeeRepository.createEmployee(any(Employee.class))).thenReturn(employee);
         Employee employeeResult = employeeService.createEmployee(employee);
 
         assertEquals(employeeResult.getAge(), employee.getAge());
+    }
+
+    @Test
+    void should_throw_expcetion_when_create_a_employee_of_age_greater_than_65_or_less_than_18() {
+        Employee employee = new Employee(null, "Tom", 16, "MALE", 20000.0);
+        when(employeeRepository.createEmployee(any(Employee.class))).thenReturn(employee);
+        assertThrows(InvalidAgeEmployeeException.class, () -> employeeService.createEmployee(employee));
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.Exception.InvalidAgeEmployeeException;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee createEmployee(@RequestBody Employee employee) {
+    public Employee createEmployee(@RequestBody Employee employee) throws InvalidAgeEmployeeException {
         return employeeService.createEmployee(employee);
     }
 

@@ -21,4 +21,8 @@ public class CompanyService {
     public void clearCompanies() {
         companyRepository.clearCompanies();
     }
+
+    public List<Company> getCompanies(Integer page, Integer size) {
+        return companyRepository.getCompanies(page, size);
+    }
 }

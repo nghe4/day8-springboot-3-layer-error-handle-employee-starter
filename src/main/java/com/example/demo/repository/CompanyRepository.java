@@ -23,4 +23,12 @@ public class CompanyRepository {
     public void clearCompanies() {
         companies.clear();
     }
+
+    public List<Company> getCompanies(Integer page, Integer size) {
+        Stream<Company> stream = companies.stream();
+        if (page != null && size != null) {
+            stream = stream.skip((long) (page - 1) * size).limit(size);
+        }
+        return stream.toList();
+    }
 }

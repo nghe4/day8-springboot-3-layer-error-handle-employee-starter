@@ -25,15 +25,7 @@ public class CompanyController {
 
     @GetMapping
     public List<Company> getCompanies(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
-        if (page != null && size != null) {
-            int start = (page - 1) * size;
-            int end = Math.min(start + size, companies.size());
-            if (start >= companies.size()) {
-                return new ArrayList<>();
-            }
-            return companies.subList(start, end);
-        }
-        return companies;
+        return companyService.getCompanies(page, size);
     }
 
     @PostMapping

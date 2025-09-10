@@ -33,4 +33,8 @@ public class CompanyService {
     public Company getCompanyById(int id) {
         return companyRepository.getCompanyById(id);
     }
+
+    public Company updateCompany(int id, Company updatedCompany) {
+        return companyRepository.updateCompany(id, updatedCompany);
+    }
 }

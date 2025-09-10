@@ -45,4 +45,10 @@ public class CompanyRepository {
                 .findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found with id: " + id));
     }
+
+    public Company updateCompany(int id, Company updatedCompany) {
+        Company company = getCompanyById(id);
+        company.setName(updatedCompany.getName());
+        return company;
+    }
 }

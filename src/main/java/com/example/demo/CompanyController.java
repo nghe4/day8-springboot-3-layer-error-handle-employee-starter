@@ -12,6 +12,7 @@ import java.util.List;
 public class CompanyController {
     private final List<Company> companies = new ArrayList<>();
 
+    @DeleteMapping("/all")
     public void empty() {
         companies.clear();
     }

@@ -23,8 +23,8 @@ public class CompanyControllerTest {
     private CompanyController companyController;
 
     @BeforeEach
-    void cleanCompanies() {
-        companyController.empty();
+    void cleanCompanies() throws Exception {
+        mockMvc.perform(delete("/companies/all"));
     }
 
     @Test

@@ -25,7 +25,7 @@ public class EmployeeControllerTest {
     private Employee createJohnSmith() throws Exception {
         Gson gson = new Gson();
         String john = gson.toJson(new Employee(null, "John Smith", 28, "MALE", 60000.0));
-        ResultActions result =  mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(john));
+        ResultActions result = mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(john));
         String jsonString = result.andReturn().getResponse().getContentAsString();
         return gson.fromJson(jsonString, Employee.class);
     }
@@ -34,7 +34,7 @@ public class EmployeeControllerTest {
     private Employee createJaneDoe() throws Exception {
         Gson gson = new Gson();
         String jane = gson.toJson(new Employee(null, "Jane Doe", 22, "FEMALE", 60000.0));
-        ResultActions result =  mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(jane));
+        ResultActions result = mockMvc.perform(post("/employees").contentType(MediaType.APPLICATION_JSON).content(jane));
         String jsonString = result.andReturn().getResponse().getContentAsString();
         return gson.fromJson(jsonString, Employee.class);
     }
@@ -78,7 +78,7 @@ public class EmployeeControllerTest {
 
     @Test
     void should_return_male_employee_when_employee_found() throws Exception {
-        Employee expect =  createJohnSmith();
+        Employee expect = createJohnSmith();
         createJaneDoe();
 
         mockMvc.perform(get("/employees?gender=male")
@@ -180,5 +180,23 @@ public class EmployeeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(5));
+    }
+
+    @Test
+    void should_active_status_true_when_create_employee() throws Exception {
+        String requestBody = """
+                        {
+                            "name": "John Smith",
+                            "age": 28,
+                            "gender": "MALE",
+                            "salary": 60000
+                        }
+                """;
+
+        mockMvc.perform(post("/employees")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.active").value(true));
     }
 }

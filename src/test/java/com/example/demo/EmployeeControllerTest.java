@@ -249,5 +249,24 @@ public class EmployeeControllerTest {
                         .content(requestBody))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void should_return_400_when_update_a_employee_with_active_status_false() throws Exception {
+        Employee employee = createJohnSmith();
+        String requestBody = """
+                    {
+                        "name": "John Smith",
+                        "age": 28,
+                        "gender": "MALE",
+                        "salary": 10000
+                    }
+            """;
+
+        mockMvc.perform(delete("/employees/" + employee.getId()));
+        mockMvc.perform(put("/employees/" + employee.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isBadRequest());
+    }
 }
 

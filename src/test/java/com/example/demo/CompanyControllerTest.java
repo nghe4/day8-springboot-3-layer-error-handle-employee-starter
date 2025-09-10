@@ -23,9 +23,6 @@ public class CompanyControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private CompanyController companyController;
-
     @BeforeEach
     void cleanCompanies() throws Exception {
         mockMvc.perform(delete("/companies/all"));

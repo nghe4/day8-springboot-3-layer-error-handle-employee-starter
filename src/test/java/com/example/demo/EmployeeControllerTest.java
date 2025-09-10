@@ -199,4 +199,14 @@ public class EmployeeControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.active").value(true));
     }
+
+    @Test
+    void should_active_status_false_when_delete_employee() throws Exception {
+        Employee employee = createJohnSmith();
+
+        mockMvc.perform(delete("/employees/"+employee.getId()));
+        mockMvc.perform(get("/employees/"+employee.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.active").value(false));
+    }
 }

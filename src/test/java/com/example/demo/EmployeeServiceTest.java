@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.Exception.InvalidAgeEmployeeException;
 import com.example.demo.Exception.InvalidSalaryEmployeeException;
+import com.example.demo.Exception.InvalidUpdateEmployeeException;
 import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
@@ -63,5 +64,14 @@ public class EmployeeServiceTest {
         employeeService.deleteEmployee(1);
 
         verify(employeeRepository).updateEmployee(eq(1), argThat(e -> e.isActive() == false));
+    }
+
+    @Test
+    void should_throw_exception_when_update_a_employee_with_active_status_false() {
+        Employee employee = new Employee(null, "Tom", 18, "MALE", 20000.0);
+        employee.setActive(false);
+        when(employeeRepository.getEmployeeById(1)).thenReturn(employee);
+
+        assertThrows(InvalidUpdateEmployeeException.class, () -> employeeService.updateEmployee(1, employee));
     }
 }

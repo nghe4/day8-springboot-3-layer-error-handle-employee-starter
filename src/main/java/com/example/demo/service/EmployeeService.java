@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.Exception.InvalidAgeEmployeeException;
 import com.example.demo.Exception.InvalidSalaryEmployeeException;
+import com.example.demo.Exception.InvalidUpdateEmployeeException;
 import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import org.springframework.http.HttpStatus;
@@ -40,11 +41,14 @@ public class EmployeeService {
         return employeeRepository.createEmployee(employee);
     }
 
-    public Employee updateEmployee(int id, Employee updatedEmployee) {
+    public Employee updateEmployee(int id, Employee updatedEmployee) throws InvalidUpdateEmployeeException {
         Employee employee = employeeRepository.getEmployeeById(id);
 
         if (employee == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found with id: " + id);
+        }
+        if (!employee.isActive()) {
+            throw new InvalidUpdateEmployeeException("Cannot update an inactive employee with id: " + id);
         }
         return employeeRepository.updateEmployee(id, updatedEmployee);
     }

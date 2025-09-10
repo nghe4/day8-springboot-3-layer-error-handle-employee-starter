@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.Exception.InvalidAgeEmployeeException;
 import com.example.demo.Exception.InvalidSalaryEmployeeException;
+import com.example.demo.Exception.InvalidUpdateEmployeeException;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee updatedEmployee) {
+    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee updatedEmployee) throws InvalidUpdateEmployeeException {
         return employeeService.updateEmployee(id, updatedEmployee);
     }
 

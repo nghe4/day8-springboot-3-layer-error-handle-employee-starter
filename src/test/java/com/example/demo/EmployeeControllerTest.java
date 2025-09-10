@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.entity.Employee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,6 @@ public class EmployeeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    //    private static Employee employee(String name, int age, String gender, double salary) {
-//        Employee e = new Employee();
-//        e.setName(name);
-//        e.setAge(age);
-//        e.setGender(gender);
-//        e.setSalary(salary);
-//        return e;
-//    }
-//
     private Employee createJohnSmith() throws Exception {
         Gson gson = new Gson();
         String john = gson.toJson(new Employee(null, "John Smith", 28, "MALE", 60000.0));

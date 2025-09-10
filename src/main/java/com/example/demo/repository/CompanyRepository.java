@@ -51,4 +51,9 @@ public class CompanyRepository {
         company.setName(updatedCompany.getName());
         return company;
     }
+
+    public void deleteCompany(int id) {
+        Company company = getCompanyById(id);
+        companies.remove(company);
+    }
 }

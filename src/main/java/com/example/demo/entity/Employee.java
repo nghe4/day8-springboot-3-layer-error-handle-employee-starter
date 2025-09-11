@@ -17,16 +17,6 @@ public class Employee {
     @Column(name = "company_id")
     private Integer companyId;
 
-    public Employee(Integer id, String name, Integer age, String gender, Double salary, Integer companyId) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
-        this.salary = salary;
-        this.isActive = true;
-        this.companyId = companyId;
-    }
-
     public Employee(Integer id, String name, Integer age, String gender, Double salary) {
         this.id = id;
         this.name = name;
@@ -34,7 +24,6 @@ public class Employee {
         this.gender = gender;
         this.salary = salary;
         this.isActive = true;
-        this.companyId = null;
     }
 
     public Employee() {

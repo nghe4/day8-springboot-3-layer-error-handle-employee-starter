@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -43,11 +44,11 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(int id) {
-        Employee employee = employeeRepository.getEmployeeById(id);
-        if (employee == null){
+        Optional<Employee> employee = employeeRepository.findById(id);
+        if (employee.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found with id: " + id);
         }
-        return employee;
+        return employee.get();
     }
 
     public Employee createEmployee(Employee employee) throws InvalidAgeEmployeeException, InvalidSalaryEmployeeException {

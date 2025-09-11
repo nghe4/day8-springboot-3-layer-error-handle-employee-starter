@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Repository
-public class EmployeeRepository implements IEmployeeRepository {
+public class EmployeeRepository {
     private final List<Employee> employees = new ArrayList<>();
 
     public EmployeeRepository() {

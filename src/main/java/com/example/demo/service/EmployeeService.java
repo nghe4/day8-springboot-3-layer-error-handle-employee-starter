@@ -4,7 +4,7 @@ import com.example.demo.entity.Employee;
 import com.example.demo.exceptions.InvalidAgeEmployeeException;
 import com.example.demo.exceptions.InvalidSalaryEmployeeException;
 import com.example.demo.exceptions.InvalidUpdateEmployeeException;
-import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.repository.IEmployeeRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,9 +16,9 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService {
-    private final EmployeeRepository employeeRepository;
+    private final IEmployeeRepository employeeRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(IEmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 

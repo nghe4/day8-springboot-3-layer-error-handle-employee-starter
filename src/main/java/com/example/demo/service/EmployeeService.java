@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.data.domain.Pageable;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,12 +77,9 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(int id) {
-        Employee employee = employeeRepository.getEmployeeById(id);
-        if (employee == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found with id: " + id);
-        }
+        Employee employee = getEmployeeById(id);
         employee.setActive(false);
-        employeeRepository.updateEmployee(id, employee);
+        employeeRepository.save(employee);
     }
 
     public void clearEmployees() {

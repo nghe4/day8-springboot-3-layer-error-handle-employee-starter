@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.data.domain.Pageable;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,15 +65,16 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(int id, Employee updatedEmployee) throws InvalidUpdateEmployeeException {
-        Employee employee = employeeRepository.getEmployeeById(id);
+        Optional<Employee> employee = employeeRepository.findById(id);
 
-        if (employee == null) {
+        if (employee.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found with id: " + id);
         }
-        if (!employee.isActive()) {
+        if (!employee.get().isActive()) {
             throw new InvalidUpdateEmployeeException("Cannot update an inactive employee with id: " + id);
         }
-        return employeeRepository.updateEmployee(id, updatedEmployee);
+        updatedEmployee.setId(id);
+        return employeeRepository.save(updatedEmployee);
     }
 
     public void deleteEmployee(int id) {

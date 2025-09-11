@@ -81,8 +81,4 @@ public class EmployeeService {
         employee.setActive(false);
         employeeRepository.save(employee);
     }
-
-    public void clearEmployees() {
-        employeeRepository.clearEmployees();
-    }
 }

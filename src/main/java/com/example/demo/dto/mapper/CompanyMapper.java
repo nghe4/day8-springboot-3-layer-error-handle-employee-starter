@@ -13,6 +13,8 @@ public class CompanyMapper {
     public CompanyResponse toResponse(Company company) {
         CompanyResponse companyResponse = new CompanyResponse();
         BeanUtils.copyProperties(company, companyResponse);
+        if (company.getEmployees() != null)
+            companyResponse.setEmployees(new EmployeeMapper().toResponse(company.getEmployees()));
         return companyResponse;
     }
 

@@ -1,15 +1,11 @@
 package com.example.demo.dto;
 
-import com.example.demo.dto.mapper.EmployeeMapper;
-import com.example.demo.entity.Employee;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CompanyResponse {
     private Integer id;
     private String name;
-    private List<Employee> employees;
+    private List<EmployeeResponse> employees; // Changed to match return type
 
     public CompanyResponse() {
     }
@@ -31,12 +27,10 @@ public class CompanyResponse {
     }
 
     public List<EmployeeResponse> getEmployees() {
-        return employees.stream()
-                .map(employee -> new EmployeeMapper().toResponse(employee))
-                .collect(Collectors.toList());
+        return this.employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(List<EmployeeResponse> employees) {
         this.employees = employees;
     }
 }

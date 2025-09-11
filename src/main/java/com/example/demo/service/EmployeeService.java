@@ -60,6 +60,7 @@ public class EmployeeService {
             throw new InvalidSalaryEmployeeException("Employee salary is null or less than or equal to 0");
         if (employee.getAge() > 29 && employee.getSalary() < 20000)
             throw new InvalidSalaryEmployeeException("Employee age over 29 and salary below 20000");
+        employee.setActive(true);
         return employeeRepository.save(employee);
     }
 

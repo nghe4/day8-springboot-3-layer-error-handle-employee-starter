@@ -7,14 +7,6 @@ public class EmployeeResponse {
     private String gender;
     private boolean isActive;
 
-    public EmployeeResponse(Integer id, String name, Integer age, String gender) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
-        this.isActive = true;
-    }
-
     public EmployeeResponse() {}
 
     public Integer getId() {

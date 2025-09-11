@@ -1,6 +1,12 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Integer age;
@@ -15,6 +21,10 @@ public class Employee {
         this.gender = gender;
         this.salary = salary;
         this.isActive = true;
+    }
+
+    public Employee() {
+
     }
 
     public Integer getId() {

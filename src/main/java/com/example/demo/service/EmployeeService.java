@@ -5,9 +5,11 @@ import com.example.demo.exceptions.InvalidAgeEmployeeException;
 import com.example.demo.exceptions.InvalidSalaryEmployeeException;
 import com.example.demo.exceptions.InvalidUpdateEmployeeException;
 import com.example.demo.repository.EmployeeRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -20,7 +22,24 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployees(String gender, Integer page, Integer size) {
-        return employeeRepository.getEmployees(gender, page, size);
+        if (gender == null) {
+            if (page == null || size == null) {
+                return employeeRepository.findAll();
+            }
+            else {
+                Pageable pageable = PageRequest.of(page - 1, size);
+                return employeeRepository.findAll(pageable).toList();
+            }
+        }
+        else {
+            if (page == null || size == null) {
+                return employeeRepository.findEmployeesByGender(gender);
+            }
+            else {
+                Pageable pageable = PageRequest.of(page - 1, size);
+                return employeeRepository.findEmployeesByGender(gender, pageable).stream().toList();
+            }
+        }
     }
 
     public Employee getEmployeeById(int id) {

@@ -26,7 +26,7 @@ public class CompanyService {
             return companyRepository.findAll();
         }
         Pageable pageable = PageRequest.of(page - 1, size);
-        return companyRepository.findCompaniesByPageable(pageable).stream().toList();
+        return companyRepository.findAll(pageable).getContent();
     }
 
     public Company createCompany(Company company) {
